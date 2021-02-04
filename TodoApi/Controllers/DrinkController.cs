@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using TodoApi.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace TodoApi.Controllers
 {
@@ -27,6 +31,7 @@ namespace TodoApi.Controllers
             }
         }
 
+        /*
         [HttpGet]
         public ActionResult<List<Drink>> GetAll()
         {
@@ -42,6 +47,19 @@ namespace TodoApi.Controllers
                 return NotFound();
             }
             return item;
+        }
+        */
+
+        [HttpGet]
+        public async Task<List<Drink>> Get()
+        {
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage
+                {RequestUri = new Uri("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"), Method = HttpMethod.Get};
+            var response = await httpClient.SendAsync(request);
+            var json = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<List<Drink>>(json);
+            return data;
         }
 
     }

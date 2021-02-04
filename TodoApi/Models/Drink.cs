@@ -18,6 +18,8 @@ namespace TodoApi.Models
         public string strDrink { get; set; }
         public string strDrinkThumb { get; set; }
         public string idDrink { get; set; }
+
+        public long Id {get; set; }
     }
     public class Root
     {
