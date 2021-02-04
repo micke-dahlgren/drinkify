@@ -31,35 +31,28 @@ namespace TodoApi.Controllers
             }
         }
 
-        /*
-        [HttpGet]
-        public ActionResult<List<Drink>> GetAll()
-        {
-            return _context.Drinks.ToList();
-        }
-
-        [HttpGet("{id}", Name = "GetTodo")]
-        public ActionResult<Drink> GetById(long id)
-        {
-            var item = _context.Drinks.Find(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return item;
-        }
-        */
 
         [HttpGet]
-        public async Task<List<Drink>> Get()
+        public async Task<Drink> Get()
         {
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage
                 {RequestUri = new Uri("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"), Method = HttpMethod.Get};
             var response = await httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<List<Drink>>(json);
-            return data;
+            var data = JsonConvert.DeserializeObject<DrinkResult>(json);
+            
+
+            var drinkList = data.drinks;
+            var drinkListLen = drinkList.Count;
+            
+            //så här kallar man random i C# tydligen.
+            Random rnd = new Random(); 
+            int randomIndex = rnd.Next(0, drinkListLen - 1);
+            
+            var retDrink = drinkList[randomIndex];
+
+            return retDrink;
         }
 
     }

@@ -21,7 +21,8 @@ namespace TodoApi.Models
 
         public long Id {get; set; }
     }
-    public class Root
+
+    public class DrinkResult
     {
         public List<Drink> drinks { get; set; }
     }
