@@ -25,13 +25,14 @@ namespace TodoApi.Models
 
     public class DrinkResult
     {
-        public List<DrinkGeneral> drinks { get; set; }
+        public List<DrinkGeneral> Drinks { get; set; }
     }
 
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
     public class DrinkDetails
     {
         public long id { get; set; }
+
         public string idDrink { get; set; }
         public string strDrink { get; set; }
         public string strDrinkAlternate { get; set; }
@@ -91,11 +92,12 @@ namespace TodoApi.Models
         public string strImageAttribution { get; set; }
         public string strCreativeCommonsConfirmed { get; set; }
         public string dateModified { get; set; }
+
     }
 
     public class DrinkDetailResult
     {
-        public List<DrinkDetails> drinkData { get; set; }
+        public List<DrinkDetails> drinks { get; set; }
     }
 }
 

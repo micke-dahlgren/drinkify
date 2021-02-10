@@ -31,7 +31,7 @@ namespace TodoApi.Controllers
 
 
         [HttpGet]
-        public async Task<DrinkDetails> Get()
+        public async Task<DrinkDetailResult> Get()
         {
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage
@@ -40,7 +40,7 @@ namespace TodoApi.Controllers
             var json = await response.Content.ReadAsStringAsync();
             var data = JsonConvert.DeserializeObject<DrinkResult>(json);
             
-            var drinkList = data.drinks;
+            var drinkList = data.Drinks;
             var drinkListLen = drinkList.Count;
             
             //så här kallar man random i C# tydligen.
@@ -55,14 +55,13 @@ namespace TodoApi.Controllers
             response = await httpClient.SendAsync(request);
             json = await response.Content.ReadAsStringAsync();
 
-            Console.WriteLine(json);
 
-            var drink = JsonConvert.DeserializeObject<DrinkDetails>(json);
+            var drink = JsonConvert.DeserializeObject<DrinkDetailResult>(json);
 
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n\n --------------------");
+            Console.WriteLine(drink.drinks);
+            Console.WriteLine(" -------------------- \n\n");
 
-            Console.WriteLine(drink);
-            
             return drink;
         }
 
