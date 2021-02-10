@@ -1,14 +1,14 @@
 displays a random alcohol free drink.
 
-To run backend: 
-$ cd todoapi
-$ dotnet restore
-$ dotnet run
+<h3>To run backend:</h3>
+$ cd todoapi <br />
+$ dotnet restore <br />
+$ dotnet run <br />
 
-To run frontend:
-$ cd drink-front
-$ npm i
-$ npm run
+<h3>To run frontend: </h3>
+$ cd drink-front<br />
+$ npm i <br />
+$ npm run <br />
 
 
 Source api : https://www.thecocktaildb.com/api.php
