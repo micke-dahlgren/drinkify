@@ -24,8 +24,6 @@ namespace TodoApi.Controllers
  
                 // Create a new TodoItem if collection is empty,
                 // which means you can't delete all TodoItems.
-                _context.Drinks.Add(new Drink { strDrink = "drink A" });
-                _context.Drinks.Add(new Drink { strDrink = "drink B" });
 
                 _context.SaveChanges();
             }
@@ -33,7 +31,7 @@ namespace TodoApi.Controllers
 
 
         [HttpGet]
-        public async Task<DrinkResult> Get()
+        public async Task<DrinkDetails> Get()
         {
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage
@@ -42,7 +40,6 @@ namespace TodoApi.Controllers
             var json = await response.Content.ReadAsStringAsync();
             var data = JsonConvert.DeserializeObject<DrinkResult>(json);
             
-
             var drinkList = data.drinks;
             var drinkListLen = drinkList.Count;
             
@@ -54,11 +51,18 @@ namespace TodoApi.Controllers
             var id = retDrink.idDrink;
 
             request = new HttpRequestMessage
-            { RequestUri = new Uri("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + id), Method = HttpMethod.Get };
+                { RequestUri = new Uri("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + id), Method = HttpMethod.Get };
             response = await httpClient.SendAsync(request);
             json = await response.Content.ReadAsStringAsync();
-            var drink = JsonConvert.DeserializeObject<DrinkResult>(json);
-            //hej
+
+            Console.WriteLine(json);
+
+            var drink = JsonConvert.DeserializeObject<DrinkDetails>(json);
+
+            Console.WriteLine("\n\n");
+
+            Console.WriteLine(drink);
+            
             return drink;
         }
 

@@ -9,6 +9,6 @@ namespace TodoApi.Models
         {
         }
 
-        public DbSet<Drink> Drinks { get; set; }
+        public DbSet<DrinkDetails> Drinks { get; set; }
     }
 }
