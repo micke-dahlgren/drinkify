@@ -33,7 +33,7 @@ namespace TodoApi.Controllers
 
 
         [HttpGet]
-        public async Task<Drink> Get()
+        public async Task<DrinkResult> Get()
         {
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage
@@ -51,8 +51,15 @@ namespace TodoApi.Controllers
             int randomIndex = rnd.Next(0, drinkListLen - 1);
             
             var retDrink = drinkList[randomIndex];
+            var id = retDrink.idDrink;
 
-            return retDrink;
+            request = new HttpRequestMessage
+            { RequestUri = new Uri("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + id), Method = HttpMethod.Get };
+            response = await httpClient.SendAsync(request);
+            json = await response.Content.ReadAsStringAsync();
+            var drink = JsonConvert.DeserializeObject<DrinkResult>(json);
+            //hej
+            return drink;
         }
 
     }
