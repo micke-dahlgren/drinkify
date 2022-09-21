@@ -1,15 +1,12 @@
-# Autosave files
-*~
-
 /node_modules
-drink-front/.pnp
+frontend/.pnp
 .pnp.js
 
 # testing
-drink-front/coverage
+frontend/coverage
 
 # production
-drink-front/build
+frontend/build
 
 # misc
 .DS_Store
@@ -28,7 +25,7 @@ yarn-error.log*
 packages/
 TestResults/
 
-drink-front/node_modules/
+frontend/node_modules/
 
 # globs
 Makefile.in
